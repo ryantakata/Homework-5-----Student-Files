@@ -7,8 +7,6 @@
   /// Do not put anything else in this section, i.e. comments, classes, functions, etc.  Only #include directives
 #include <unordered_map>
 #include <iostream>
-#include <string>
-#include <locale>
 /////////////////////// END-TO-DO (1) ////////////////////////////
 
 class WordFrequency

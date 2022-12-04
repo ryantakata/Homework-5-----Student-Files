@@ -48,10 +48,8 @@ WordFrequency::WordFrequency( std::istream & iStream )
   std::string words;
   while(iStream >> words)
   {
-    frequency.insert({sanitize(words), 0});
     ++frequency[sanitize(words)];
-  }
-  
+  } 
 }
 /////////////////////// END-TO-DO (2) ////////////////////////////
 
@@ -102,8 +100,8 @@ std::size_t WordFrequency::wordCount( const std::string & word) const
 ///////////////////////// TO-DO (5) //////////////////////////////
 std::string WordFrequency::mostFrequentWord() const
 {
-  int freq = 0;                   //Stores the amount of times the most frequent word occurs.
-  std::string mostFrequent = "";  //Stores the most frequent word.
+  int value = 0;                   //Stores the amount of times the most frequent word occurs.
+  std::string mostFrequent = "";   //Stores the most frequent word.
   
   if (frequency.empty() == true)
   {
@@ -111,20 +109,12 @@ std::string WordFrequency::mostFrequentWord() const
   }
   else
   {
-    for (auto i = frequency.begin(); i != frequency.end(); ++i) //Starts to iterate through the unordered_map
+    for (auto word : frequency)
     {
-      int count = 0;                                            //Count keeps track of the amount of times a word is repeated.
-      for (auto j = ++i; j != frequency.end(); ++j)             //Nested loop to compare every word in the unordered_map 
-      {                                                         //after the initial word in the first for loop.
-        if (sanitize(j->first) == sanitize(i->first))                               //If a duplicate word is found, count increments.
-        {
-          ++count;
-        }
-      }
-      if (count >= freq)                                        
+      if (word.second > value)
       {
-        mostFrequent = sanitize(i->first);
-        freq = count;
+        mostFrequent = sanitize(word.first);
+        value = word.second;
       }
     }
   }
